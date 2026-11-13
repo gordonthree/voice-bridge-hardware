@@ -1,4 +1,4 @@
-# Requirements (first draft, 2026-11-13; from the Waveshare project's notes, NOT yet reviewed by Gordon)
+# Requirements (draft, 2026-11-13; direction answers from Gordon added the same day, the rest still unreviewed)
 
 Items marked **[known]** come from the Waveshare project's README and notes. Items marked **[ask]** are questions for Gordon: the vision is
 changing, so these are the first thing to settle.
@@ -21,11 +21,17 @@ changing, so these are the first thing to settle.
 - **[known]** Physical controls: hold-to-talk, volume up/down, mute, persona switch, "I am finished".
 - **[known]** A visible state (the ring: listening, thinking, speaking, message waiting, muted, offline, error).
 - **[ask]** Speaker identity: should the terminal (or the bridge) know it is Gordon talking, and not a distant TV, timer or other person?
-- **[ask]** Which of these is the real goal now: hands-free from across the room, near-field push-to-talk, something else?
+- **[decided 2026-11-13]** Hands-free from across the room stays the goal, at **2 to 3 m at most**. Gordon has been reading about beamforming
+  arrays (tracking a speaker, rejecting ambient noise better), so a real mic array with beamforming is the intended answer to shortcomings 3
+  and 4 in `docs/lessons-from-waveshare.md`.
 
 ## Constraints
 
 - **[ask]** Budget, build effort (buy a module / carrier board vs design a PCB), time to a working unit.
-- **[ask]** Tolerance for tinkering: another ESP32-S3 board, an SBC (Raspberry Pi class, which could run the front end and even wake word
-  locally), a purchased smart-speaker platform?
+- **[decided 2026-11-13]** More audio processing moves **onto the terminal**: the front end (beamforming, echo cancellation, noise suppression)
+  and possibly wake word, or at least a **local trigger** with the bridge still doing the real wake-word decision. The ESP32-S3 is good for
+  the interface, but its memory is too small and it has no peripherals for audio beyond the I2S interfaces.
+- **[decided 2026-11-13, proposed architecture, not yet validated]** Two processors: an **STM32H7** dedicated to the microphone array and audio
+  processing, and an **ESP32-S3** for the user interface (keys, ring, Wi-Fi) and for streaming to and from the bridge. Open: the link
+  between them (I2S/SAI for audio, SPI or UART for control), who owns the speaker and the echo reference, and the update path for two firmwares.
 - **[known]** Privacy rule from the bridge: logs carry types and sizes, never conversation text.

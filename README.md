@@ -18,5 +18,6 @@ Keep each entry to one line; when you add a section or a long dated note, add a 
 
 ## Status
 
+- 2026-11-13: direction set by Gordon: hands-free at 2 to 3 m with a beamforming mic array; audio processing (and possibly a local wake trigger) on the terminal; proposed split of an STM32H7 (array and audio) plus an ESP32-S3 (interface and streaming). Candidates not yet researched (`docs/options.md`).
 - 2026-11-13: repo created. Requirements are a first draft from the Waveshare project's notes; Gordon has not reviewed them. No candidate
   platform has been looked at yet.
