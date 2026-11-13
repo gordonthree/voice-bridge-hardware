@@ -11,4 +11,4 @@ Sibling repos: `voice-bridge` (`~/dev/voice-bridge`; the bridge and the WebSocke
 (`~/dev/voice-bridge-waveshare`; the firmware for the board we have now, and the source of every measurement quoted here).
 
 Keys: never read `~/.config/voice-bridge/*.env` (API keys and the GitHub token; a user-level deny rule enforces it). Commit new project files as
-they are created; push only when asked (no remote yet).
+they are created; push only when asked (`tools/push.sh`, same token as the sibling repos, `PAT_VOICE_BRIDGE`; the token must be granted this repo too).
